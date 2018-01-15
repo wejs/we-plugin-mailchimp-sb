@@ -1,0 +1,30 @@
+<form name="widget-form-{{type}}">
+  <div class="form-group">
+    <label for="widget-form-{{type}}-title">{{t 'title'}}</label>
+    <input name="title" value="{{title}}" type="text" class="form-control" id="widget-form-{{type}}-title" placeholder="{{t 'widget.title'}}">
+  </div>
+
+  <div class="form-group">
+    <label>Mailchimp API key:</label>
+    <input name="mailChimpApiKey" value="{{configuration.mailChimpApiKey}}" type="text" class="form-control" id="widget-form-{{type}}-mailChimpApiKey" placeholder="Digite a api key aqui..." required="required">
+    <p class="help-block">A API Key gerada na sessão profile da conta do Mailchimp.
+    <br>Exemplo: 732d1e3127d54d5c9827dc1e5a271eb6-us16</p>
+  </div>
+  <div class="form-group">
+    <label>ID único da lista:</label>
+    <input name="mailChimpListID" value="{{configuration.mailChimpListID}}" type="text" class="form-control" id="widget-form-{{type}}-mailChimpListID" placeholder="Digite o id aqui..." required="required">
+    <p class="help-block">O ID único da lista no Mailchimp disponível nas configurações da lista de email. <br>
+    Exemplo: 943fba4c11</p>
+  </div>
+
+  {{{controllFields}}}
+
+  {{#if id}}
+    <input type="hidden" name="id" value="{{id}}">
+    <button type="submit" class="btn btn-primary">{{t 'Save'}}</button>
+    <button type="submit" data-dismiss="modal" class="btn btn-default">{{t 'Cancel'}}</button>
+  {{else}}
+    <button type="submit" class="btn btn-primary">{{t 'Add'}}</button>
+    <button type="submit" data-dismiss="modal" class="btn btn-default">{{t 'Cancel'}}</button>
+  {{/if}}
+</form>

@@ -13,17 +13,5 @@ module.exports = function loadPlugin(projectPath, Plugin) {
     }
   });
 
-  /**
-   * Plugin fast loader for speed up We.js project bootstrap
-   *
-   * @param  {Object}   we
-   * @param {Function} done    callback
-   */
-  plugin.fastLoader = function fastLoader(we, done) {
-    // - Controllers:
-    we.controllers.news = new we.class.Controller( require('./server/controllers/newsletter.js') );
-    done();
-  }
-
   return plugin;
 };

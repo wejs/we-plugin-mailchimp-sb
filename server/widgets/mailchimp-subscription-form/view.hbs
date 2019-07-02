@@ -1,5 +1,3 @@
-{{#if widget.configuration.mailChimpListID}}
-{{#if widget.configuration.mailChimpApiKey}}
 <form class="newsletterSubscribe" action="/newsletter/subscribe" method="POST">
   <div class="form-group label-floating form-group-sm is-empty">
     <label class="control-label" for="name">Nome:</label>
@@ -15,5 +13,3 @@
   <input type="hidden" name="widgetId" value="{{widget.id}}">
   <button type="submit" class="btn btn-default btn-raised btn-sm">Inscrever</button>
 </form>
-{{/if}}
-{{/if}}

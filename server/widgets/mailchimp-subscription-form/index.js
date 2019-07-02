@@ -14,20 +14,16 @@ module.exports = function (projectPath, Widget) {
     return next();
   };
 
-  // // form middleware, use for get data for widget form
-  // widget.formMiddleware = function formMiddleware(req, res, next) {
-  //
-  //   next();
-  // }
-
   // Widget view middleware, use for get data after render the widget html
   widget.viewMiddleware = function viewMiddleware(w, req, res, next) {
+    const cfg = w.configuration;
 
-    w.fbPageId = req.we.systemSettings.fbPageId;
-    w.siteName = (req.we.systemSettings.siteName || req.we.config.appName);
+    if (!cfg.mailChimpListID || !cfg.mailChimpApiKey) {
+      w.hide = true;
+    }
 
    return next();
-  }
+  };
 
   return widget;
 };

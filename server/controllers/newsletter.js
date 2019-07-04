@@ -17,7 +17,8 @@ module.exports = {
       return widgetNotFound(req, res);
     }
 
-    const we = req.we;
+    const we = req.we,
+      log = we.log;
 
     we.db.models.widget
     .findById(req.body.widgetId)
@@ -69,7 +70,7 @@ module.exports = {
           }
         }
       }, function afterSendSubscribeRequest(error, response, body) {
-        req.we.log.verbose('newsletter:subscribe:body', body);
+        log.verbose('newsletter:subscribe:body', body);
 
         if (
           response.statusCode < 300 ||
@@ -78,11 +79,12 @@ module.exports = {
           res.addMessage('success', {
             text: 'newsletter.subscription.success'
           });
-
+          log.verbose('newsletter:subscribe:success', body);
         } else {
           res.addMessage('error', {
             text: 'newsletter.subscription.error'
           });
+          log.error('newsletter.subscription:', error);
         }
 
         res.goTo(req.body.returnTo || '/');
@@ -91,11 +93,12 @@ module.exports = {
     })
     .catch(res.queryError);
   }
-}
+};
 
 function widgetNotFound(req, res) {
   res.addMessage('error', {
     text: 'Widget relacionado não foi encontrado'
   });
+  req.we.log.verbose('newsletter:subscribe:widget:not:found');
   return res.goTo(req.body.returnTo || '/');
 }
